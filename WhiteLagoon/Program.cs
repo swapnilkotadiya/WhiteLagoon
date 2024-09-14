@@ -1,8 +1,16 @@
+using Microsoft.EntityFrameworkCore;
+using WhiteLagoon.Infrastructure.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Setup the database connection
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Build the web application
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
